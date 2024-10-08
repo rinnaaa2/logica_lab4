@@ -19,11 +19,16 @@ struct Node* CreateTree(struct Node* root, struct Node* r, int data) //созд�
 			exit(0);
 		}
 
+		
+
 		r->left = NULL;
 		r->right = NULL;
 		r->data = data;
 		if (root == NULL) return r;
-
+		
+		if (data == root->data) {	//Проверяем на наличие
+			return root; //если есть, то возвращаем указатель на корень
+		}
 		if (data > root->data)	root->left = r;
 		else root->right = r;
 		return r;
@@ -101,13 +106,14 @@ int main()
 
 	print_tree(root, 0);
 
+	printf("\nВведите число для поиска:");
 	scanf_s("%d", &D);
 
 	r = find(root, D);
-	if (r != NULL) printf("Не найден = %d", r->data);
-
+	if (r != NULL) printf("Найден = %d", r->data);
+	
 	co = fcount(root, D, 0);
-	printf("Количество = %d ", co);
+	printf("\nКоличество = %d ", co);
 
 	return 0;
 }
